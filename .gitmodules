@@ -1,6 +1,8 @@
 [submodule "mo_03_Data-Center_DX-cooled_without_ASE_4N"]
 	path = mo_03_Data-Center_DX-cooled_without_ASE_4N
 	url = https://github.com/mlm7685psu/mo_03_Data-Center_DX-cooled_without_ASE_4N.git
+	branch = main
 [submodule "Buildings"]
 	path = Buildings
 	url = https://github.com/lbl-srg/modelica-buildings.git
+	branch = master
