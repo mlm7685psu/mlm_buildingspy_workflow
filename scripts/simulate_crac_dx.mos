@@ -1,0 +1,44 @@
+// Batch simulation script for mo_03_dc_woase_n4.CRAC_DXwoASE.CRAC_dx using Dymola
+Modelica.Utilities.Streams.print("=== Starting CRAC_dx batch simulation ===");
+
+// Resolve repository root from current working directory (run Dymola from repo root)
+repoPath := Modelica.Utilities.Files.fullPathName(".");
+modelPath := repoPath + "/mo_03_Data-Center_DX-cooled_without_ASE_4N/mo_03_dc_woase_n4.mo";
+buildingsPath := repoPath + "/Buildings/package.mo";
+resultsDir := repoPath + "/mo_03_Data-Center_DX-cooled_without_ASE_4N/results";
+
+// Move working directory to the template folder
+cd(repoPath + "/mo_03_Data-Center_DX-cooled_without_ASE_4N");
+clearlog();
+
+Modelica.Utilities.Streams.print("Loading Modelica Standard Library...");
+loadModel("Modelica");
+
+Modelica.Utilities.Streams.print("Loading Buildings library from " + buildingsPath);
+if not Modelica.Utilities.Files.exist(buildingsPath) then
+  Modelica.Utilities.Streams.error("Buildings library not found at " + buildingsPath);
+end if;
+openModel(buildingsPath);
+
+Modelica.Utilities.Streams.print("Loading template package " + modelPath);
+if not Modelica.Utilities.Files.exist(modelPath) then
+  Modelica.Utilities.Streams.error("Template package not found at " + modelPath);
+end if;
+openModel(modelPath);
+
+if not Modelica.Utilities.Files.exist(resultsDir) then
+  Modelica.Utilities.Files.createDirectory(resultsDir);
+end if;
+
+Modelica.Utilities.Streams.print("Simulating mo_03_dc_woase_n4.CRAC_DXwoASE.CRAC_dx ...");
+resultName := resultsDir + "/CRAC_dx_res";
+simulateModel(
+  "mo_03_dc_woase_n4.CRAC_DXwoASE.CRAC_dx",
+  startTime=0,
+  stopTime=86400,
+  numberOfIntervals=8640,
+  tolerance=1e-6,
+  method="Dassl",
+  resultFile=resultName);
+
+Modelica.Utilities.Streams.print("Simulation finished. Results stored at " + resultName + ".mat");
