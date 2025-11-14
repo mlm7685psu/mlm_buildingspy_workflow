@@ -73,3 +73,10 @@
    1. Automate post-processing into a reproducible Python notebook or CLI.
    2. Wire this workflow into CI (optional) once licensing constraints are resolved.
    3. Mirror results + plots into the engineering notebook for Dr. Zuo review packages.
+
+9. **JSON-Driven Automation (`main.py`, `main.json`)**
+   1. Input parameters live in `main.json`. Each object under `runs` defines `run_id`, `template`, stop time, solver settings, and the target results directory.
+   2. Execute all runs: `python main.py` (defaults to `main.json`). Execute a single run: `python main.py --run-id mo03_baseline`.
+   3. The script renders a MOS file per run in `automation/generated_mos/`, launches Dymola headlessly, and drops results in `runs/<run_id>/<run_id>.mat`.
+   4. Customize the Dymola executable path either in `main.json` (`dymola_exe`) or ad-hoc via `python main.py --dymola-exe "D:/Apps/Dymola/bin64/Dymola.exe"`.
+   5. Extend each run entry with future `plot_signals` or KPI definitions—`main.py` already parses them for downstream processing hooks.

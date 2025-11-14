@@ -1,0 +1,31 @@
+{
+  "dymola_exe": "C:/Program Files/Dymola 2024x Refresh 1/bin64/Dymola.exe",
+  "runs": [
+    {
+      "run_id": "mo03_baseline",
+      "template": "mo_03",
+      "stop_time": 86400,
+      "number_of_intervals": 8640,
+      "tolerance": 1e-6,
+      "method": "Dassl",
+      "result_subdir": "runs/mo03_baseline",
+      "plot_signals": [
+        "mo_03_dc_woase_n4.CRAC_DXwoASE.CRAC_dx.roo.T",
+        "mo_03_dc_woase_n4.CRAC_DXwoASE.CRAC_dx.global_senTemSupplyAIr.T"
+      ]
+    },
+    {
+      "run_id": "mo01_baseline",
+      "template": "mo_01",
+      "stop_time": 86400,
+      "number_of_intervals": 8640,
+      "tolerance": 1e-6,
+      "method": "Dassl",
+      "result_subdir": "runs/mo01_baseline",
+      "plot_signals": [
+        "mo_01_dc_woase_n1.CRAC_DXwoASE.CRAC_dx.roo.T",
+        "mo_01_dc_woase_n1.CRAC_DXwoASE.CRAC_dx.global_senTemSupplyAIr.T"
+      ]
+    }
+  ]
+}
